@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PGA Society Registration Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            animation: slideUp 0.8s ease-out;
+            width: 95%;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.05) 10px,
+                rgba(255,255,255,0.05) 20px
+            );
+            animation: shimmer 20s linear infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .welcome-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #27ae60;
+        }
+        
+        .committee-section {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border: 1px solid #e9ecef;
+        }
+        
+        .committee-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            border-bottom: 2px solid #27ae60;
+            padding-bottom: 5px;
+        }
+        
+        .committee-member {
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f3f4;
+        }
+        
+        .committee-member:last-child {
+            border-bottom: none;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .fees-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .form-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-top: 30px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .form-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .form-column h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 8px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-size: 0.95em;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #fff;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #27ae60;
+            box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .hardcoded-field {
+            background-color: #f5f5f5;
+            border: 2px solid #ddd;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            color: #333;
+            cursor: not-allowed;
+            user-select: none;
+        }
+        
+        .hardcoded-field-value {
+            font-weight: 600;
+            color: #2c3e50;
+            padding: 8px 12px;
+            background-color: #e9ecef;
+            border-radius: 6px;
+            margin-top: 5px;
+            display: block;
+        }
+        
+        .payment-info {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(39, 174, 96, 0.5);
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 1200px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 2em;
+            }
+            .container {
+                margin: 10px;
+                width: 95%;
+                max-width: 95%;
+            }
+            .content {
+                padding: 20px;
+            }
+            .form-section {
+                padding: 20px;
+            }
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #a8e6cf 0%, #dcedc1 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .website-link {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .website-link:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .success-message {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            display: none;
+        }
+        
+        .error-message {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+            display: none;
+        }
+        
+        .download-instructions {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .download-btn {
+            background: #3498db;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+        
+        .download-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .download-icon {
+            margin-right: 8px;
+            font-size: 1.2em;
+        }
+        
+        .image-preview {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 15px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: none;
+        }
+        
+        .screenshot-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 0;
+            }
+            .container {
+                width: 100%;
+                border-radius: 0;
+                margin: 0;
+            }
+            .content {
+                padding: 15px 10px;
+            }
+            .header {
+                padding: 20px 15px;
+            }
+            .header h1 {
+                font-size: 1.8em;
+            }
+            .form-section, .welcome-section, .committee-section, 
+            .info-box, .fees-section, .payment-info {
+                padding: 15px 12px;
+            }
+            .form-group input, .form-group select {
+                font-size: 16px; 
+            }
+            .submit-btn {
+                padding: 14px 30px;
+                font-size: 1em;
+                width: 100%;
+            }
+            .form-column {
+                padding: 15px 12px;
+            }
+        }
+        
+        /* Capture container for screenshot */
+        .capture-container {
+            position: absolute;
+            top: 0;
+            left: -9999px; /* Moves the element off the visible screen */
+            width: 800px;  /* A fixed width for a landscape-like layout */
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .capture-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #27ae60;
+        }
+        
+        .capture-form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .capture-form-group {
+            margin-bottom: 12px;
+        }
+        
+        .capture-form-group label {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 14px;
+            margin-bottom: 5px;
+            display: block;
+        }
+        
+        .capture-form-group .value {
+            font-size: 16px;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border: 1px solid #e9ecef;
+            word-wrap: break-word;
+        }
+
+        .privacy-link {
+            display: inline-block;
+            background: #8e44ad;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .privacy-link:hover {
+            background: #9b59b6;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(142, 68, 173, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏌️ PGA Society</h1>
+            <p>Swindle & League Invitation Form</p>
+        </div>
+        
+        <div class="content">
+            <div class="success-message" id="successMessage">
+                <h3>✅ Registration Prepared!</h3>
+                <p>Your registration details are ready to download.</p>
+                <p>Click the Download button below to save your form as an image.</p>
+            </div>
+            
+            <div class="error-message" id="errorMessage">
+                <h3>❌ Form Error</h3>
+                <p id="errorText">Please fill all required fields correctly.</p>
+            </div>
+            
+            <div class="welcome-section">
+                <h2>Welcome to PGA Society</h2>
+                <p>We are delighted to welcome you to the PGA Golf Society, following your request to join as a member.</p>
+                <p>Below is an introduction to the committee members responsible for overseeing various aspects of the society, including league management, results, and decision-making or dispute resolution:</p>
+            </div>
+            
+            <div class="committee-section">
+                <h3>📋 Committee Members</h3>
+                <div class="committee-member"><strong>Kamal Dhunna</strong> – Founder of PGA Society, in charge of finances</div>
+                <div class="committee-member"><strong>Theara Harjinder</strong> – Founder of PGA Society, responsible for entertainment bookings</div>
+                <div class="committee-member"><strong>Joe Ciampa</strong> – Website owner, Manages League Tables and Results</div>
+                <div class="committee-member"><strong>Peter Ramsden</strong> – Responsible for decision-making</div>
+                <div class="committee-member"><strong>Daren Davey</strong> – Responsible for decision-making</div>
+                <div class="committee-member"><strong>Julian Pennie</strong> – Responsible for decision-making</div>
+            </div>
+            
+            <div class="info-box">
+                <h3>🌐 Important Information</h3>
+                <p><strong>All rules and guidelines:</strong> <a href="https://pga.1jc.co.uk" class="website-link" target="_blank">https://pga.1jc.co.uk</a></p>
+                <p>Please bookmark this link for easy access on your phone. The site contains information on rules, league tables, and past winners (HOF).</p>
+                <p><strong>WhatsApp Group:</strong> You will be added once registration fees are paid (PGA Winter & Summer League)</p>
+                <p><strong>Schedule:</strong> Every Friday by 18:00 you are required to register to be entered into the draw for Saturday, Tee Off at 08:15 (subject to Letchworth Golf Club schedule changes)</p>
+                <p><strong>Golf Game Book:</strong> Required membership for live leaderboard - friend requests will be sent</p>
+            </div>
+            
+            <div class="fees-section">
+                <h3>💰 Membership Fees</h3>
+                <p><strong>Registration Fee (Non-refundable):</strong></p>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li><strong>£10 towards end-of-season prizes</strong></li>
+                    <li><strong>£10 contributes to end-of-season meal</strong></li>
+                    <li><strong>Summer League Registration: £20</strong></li>
+                    <li><strong>Winter League Registration: £20</strong></li>
+                </ul>
+                <p><strong>Swindle Payments:</strong> £5 registeration towards Saturday Swindle game (must be paid by Friday 18:00)</p>
+                <p><em>League fund information: 40 PGA members at £20 = £800 total towards league prizes and Drinks/Meal night out</em></p>
+            </div>
+            
+            <form class="form-section" id="pgaRegistrationForm">
+                <h3>📝 Registration Information</h3>
+                
+                <div class="form-row">
+                    <div class="form-column">
+                        <h4>Your Payment Details</h4>
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" name="fullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hcpIndex">HCP Index *</label>
+                            <input type="number" id="hcpIndex" name="hcpIndex" step="0.1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="bankName">Bank Name *</label>
+                            <input type="text" id="bankName" name="bankName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sortCode">Sort Code *</label>
+                            <input type="text" id="sortCode" name="sortCode" placeholder="XX-XX-XX" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="accountNumber">Account Number *</label>
+                            <input type="text" id="accountNumber" name="accountNumber" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-column">
+                        <h4>Payments Paid Out Account</h4>
+                        <div class="form-group">
+                            <label>Full Name *</label>
+                            <div class="hardcoded-field">
+                                <span class="hardcoded-field-value">Kamal Dhunna</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Bank Name *</label>
+                            <div class="hardcoded-field">
+                                <span class="hardcoded-field-value">Lloyds Bank</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Sort Code *</label>
+                            <div class="hardcoded-field">
+                                <span class="hardcoded-field-value">77-05-04</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Account Number *</label>
+                            <div class="hardcoded-field">
+                                <span class="hardcoded-field-value">38211160</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row" style="grid-template-columns: 1fr 1fr; margin-top: 20px;">
+                    <div class="form-group">
+                        <label for="registrationType">Registration Type *</label>
+                        <select id="registrationType" name="registrationType" required>
+                            <option value="">Select League</option>
+                            <option value="summer">Summer League (£20)</option>
+                            <option value="winter">Winter League (£20)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button type="submit" class="submit-btn" id="submitButton">
+                        <span class="spinner hidden" id="submitSpinner"></span>
+                        <span id="submitText">Generate Registration Form</span>
+                    </button>
+                </div>
+            </form>
+            
+            <div class="download-instructions" id="downloadInstructions" style="display: none;">
+                <h3>📋 Download Registration Form</h3>
+                <p><strong>Your registration form is ready to download:</strong></p>
+                
+                <div class="screenshot-container">
+                    <img id="formScreenshot" class="image-preview" alt="Form Screenshot">
+                </div>
+                
+                <div class="btn-group" style="display: flex; justify-content: center; margin-top: 20px;">
+                    <button class="download-btn" id="downloadButton">
+                        <span class="download-icon">📥</span>
+                        <span>Download Image</span>
+                    </button>
+                </div>
+                
+                <p style="margin-top: 15px;">Click the button above to download your form image.</p>
+                <p>After downloading, you can share it via email or other methods as needed.</p>
+            </div>
+            
+            <div class="payment-info">
+                <h3>💳 Payment Instructions</h3>
+                <p><strong>Complete above form and then, GENERATE REGISTERATION FORM and attach via WhatsApp and send to Kamal Dhunna Private.</strong></p>
+                <p><strong>Please transfer your membership joining fee to account detail provided.</strong></p>
+                <p>Once payment is confirmed, you will be added to the WhatsApp group and receive Golf Game Book friend requests from committee members.</p>
+                <a id="privacyNoticeLink" class="privacy-link">📄 Privacy_Notice_PGA_Society</a>
+            </div>
+        </div>
+    </div>
+    
+    <div id="captureContainer" class="capture-container">
+        <div class="capture-header">
+            <h3>PGA Society Registration Form</h3>
+            <p>Submitted by: <span id="captureFullName"></span></p>
+        </div>
+        
+        <div class="capture-form-row">
+            <div class="capture-form-group">
+                <label>Full Name</label>
+                <div class="value" id="captureNameValue"></div>
+            </div>
+            <div class="capture-form-group">
+                <label>HCP Index</label>
+                <div class="value" id="captureHcpValue"></div>
+            </div>
+        </div>
+        
+        <div class="capture-form-row">
+            <div class="capture-form-group">
+                <label>Bank Name</label>
+                <div class="value" id="captureBankValue"></div>
+            </div>
+            <div class="capture-form-group">
+                <label>Sort Code</label>
+                <div class="value" id="captureSortCodeValue"></div>
+            </div>
+        </div>
+        
+        <div class="capture-form-row">
+            <div class="capture-form-group">
+                <label>Account Number</label>
+                <div class="value" id="captureAccountValue"></div>
+            </div>
+            <div class="capture-form-group">
+                <label>Registration Type</label>
+                <div class="value" id="captureRegistrationValue"></div>
+            </div>
+        </div>
+        
+        <div class="capture-form-row">
+            <div class="capture-form-group">
+                <label>Phone Number</label>
+                <div class="value" id="capturePhoneValue"></div>
+            </div>
+            <div class="capture-form-group">
+                <label>Submission Date</label>
+                <div class="value" id="captureDateValue"></div>
+            </div>
+        </div>
+        
+        <div class="capture-form-row">
+            <div class="capture-form-group" style="grid-column: 1 / -1;">
+                <label>Payment Details</label>
+                <div class="value">
+                    Please transfer payment to:<br>
+                    Account Name: Kamal Dhunna<br>
+                    Bank: Lloyds Bank<br>
+                    Sort Code: 77-05-04<br>
+                    Account Number: 38211160
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    
+    <script>
+        document.getElementById('pgaRegistrationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            document.getElementById('successMessage').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'none';
+            
+            const requiredFields = this.querySelectorAll('[required]');
+            let isValid = true;
+            let firstInvalidField = null;
+
+            requiredFields.forEach(field => {
+                field.style.borderColor = '#e9ecef';
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.style.borderColor = '#e74c3c';
+                    if (!firstInvalidField) firstInvalidField = field;
+                }
+            });
+            
+            const sortCodeField = document.getElementById('sortCode');
+            if (sortCodeField.value && !/^\d{2}-\d{2}-\d{2}$/.test(sortCodeField.value)) {
+                isValid = false;
+                sortCodeField.style.borderColor = '#e74c3c';
+                document.getElementById('errorText').textContent = 'Please enter sort code in the format XX-XX-XX';
+                if (!firstInvalidField) firstInvalidField = sortCodeField;
+            } else if (!isValid) {
+                 document.getElementById('errorText').textContent = 'Please fill all required fields correctly.';
+            }
+            
+            if (!isValid) {
+                document.getElementById('errorMessage').style.display = 'block';
+                if (firstInvalidField) {
+                    firstInvalidField.focus();
+                }
+                return;
+            }
+            
+            const submitButton = document.getElementById('submitButton');
+            const spinner = document.getElementById('submitSpinner');
+            const submitText = document.getElementById('submitText');
+            
+            submitButton.disabled = true;
+            spinner.classList.remove('hidden');
+            submitText.textContent = 'Generating...';
+            
+            try {
+                populateCaptureContainer();
+                
+                const imageData = await captureFormScreenshot();
+                
+                const screenshotImg = document.getElementById('formScreenshot');
+                screenshotImg.src = imageData;
+                screenshotImg.style.display = 'block';
+                
+                document.getElementById('downloadButton').onclick = function() {
+                    downloadImage(imageData, document.getElementById('fullName').value);
+                };
+                
+                document.getElementById('downloadInstructions').style.display = 'block';
+                document.getElementById('successMessage').style.display = 'block';
+                
+                document.getElementById('downloadInstructions').scrollIntoView({ behavior: 'smooth' });
+                
+            } catch (error) {
+                console.error('Error generating form:', error);
+                document.getElementById('errorText').textContent = 'There was a problem generating your form. Please try again.';
+                document.getElementById('errorMessage').style.display = 'block';
+            } finally {
+                submitButton.disabled = false;
+                spinner.classList.add('hidden');
+                submitText.textContent = 'Generate Registration Form';
+            }
+        });
+        
+        document.getElementById('sortCode').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/[^\d]/g, '');
+            if (value.length > 4) value = `${value.slice(0, 2)}-${value.slice(2, 4)}-${value.slice(4, 6)}`;
+            else if (value.length > 2) value = `${value.slice(0, 2)}-${value.slice(2, 4)}`;
+            e.target.value = value;
+        });
+        
+        function populateCaptureContainer() {
+            const getValue = id => document.getElementById(id).value;
+            const registrationSelect = document.getElementById('registrationType');
+            const registrationText = registrationSelect.options[registrationSelect.selectedIndex].text;
+            const now = new Date();
+            const formattedDate = now.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+            document.getElementById('captureFullName').textContent = getValue('fullName');
+            document.getElementById('captureNameValue').textContent = getValue('fullName');
+            document.getElementById('captureHcpValue').textContent = getValue('hcpIndex');
+            document.getElementById('captureBankValue').textContent = getValue('bankName');
+            document.getElementById('captureSortCodeValue').textContent = getValue('sortCode');
+            document.getElementById('captureAccountValue').textContent = getValue('accountNumber');
+            document.getElementById('captureRegistrationValue').textContent = registrationText;
+            document.getElementById('capturePhoneValue').textContent = getValue('phone');
+            document.getElementById('captureDateValue').textContent = formattedDate;
+        }
+        
+        async function captureFormScreenshot() {
+            const captureContainer = document.getElementById('captureContainer');
+            
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            const canvas = await html2canvas(captureContainer, {
+                scale: 2, 
+                logging: false,
+                useCORS: true,
+                backgroundColor: '#ffffff'
+            });
+            
+            return canvas.toDataURL('image/png');
+        }
+        
+        function downloadImage(imageData, fullName) {
+            const link = document.createElement('a');
+            const fileName = `pga-registration-${fullName.trim().replace(/\s+/g, '-')}.png`;
+            link.href = imageData;
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const privacyHtmlContent = `
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Privacy Notice - PGA Swindle & Society</title>
+                <style>
+                    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; margin: 0; padding: 20px; }
+                    .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+                    h1, h2 { color: #2c3e50; border-bottom: 2px solid #27ae60; padding-bottom: 10px; }
+                    ul { list-style-type: disc; padding-left: 20px; }
+                    li { margin-bottom: 8px; }
+                    strong { color: #34495e; }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <h1>Privacy Notice – PGA Swindle & Society</h1>
+                    <p>This Privacy Notice explains how we collect, use, and protect your personal data when you use our PGA Swindle & Society App. Please read it carefully.</p>
+
+                    <h2>1. What Data We Collect</h2>
+                    <p>We may collect the following information from you:</p>
+                    <ul>
+                        <li>Name</li>
+                        <li>Phone number</li>
+                        <li>Email address</li>
+                        <li>Bank account details (for group payments where applicable)</li>
+                    </ul>
+
+                    <h2>2. Why We Collect Your Data</h2>
+                    <p>We collect this information to:</p>
+                    <ul>
+                        <li>Communicate with you about group activities</li>
+                        <li>Manage group membership</li>
+                        <li>Process payments or reimbursements</li>
+                        <li>Keep accurate group records</li>
+                    </ul>
+
+                    <h2>3. Legal Basis for Processing</h2>
+                    <p>We rely on your consent and/or the necessity of processing for the administration of the group. You may withdraw your consent at any time by contacting us.</p>
+
+                    <h2>4. How Long We Keep Your Data</h2>
+                    <p>We will keep your personal data only as long as necessary for the purposes stated above. When no longer required, your data will be securely deleted.</p>
+
+                    <h2>5. How We Protect Your Data</h2>
+                    <p>Your data is stored securely and access is restricted to group committee members only. We take appropriate technical and organisational measures to prevent unauthorised access.</p>
+
+                    <h2>6. Who We Share Your Data With</h2>
+                    <p>We do not share your data with third parties, except when legally required or with your explicit consent.</p>
+
+                    <h2>7. Your Rights</h2>
+                    <p>You have the right to:</p>
+                    <ul>
+                        <li>Access the data we hold about you</li>
+                        <li>Request corrections</li>
+                        <li>Request deletion</li>
+                        <li>Withdraw consent</li>
+                    </ul>
+                    <p>To exercise these rights, please contact us using the details below.</p>
+
+                    <h2>8. Contact Us</h2>
+                    <p>If you have questions about this Privacy Notice or your data, please contact the PGA Committee through WhatsApp group.</p>
+                </div>
+            </body>
+            </html>`;
+
+            const privacyLink = document.getElementById('privacyNoticeLink');
+            if (privacyLink) {
+                privacyLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const privacyWindow = window.open('', '_blank');
+                    if (privacyWindow) {
+                        privacyWindow.document.write(privacyHtmlContent);
+                        privacyWindow.document.close();
+                    } else {
+                        alert('Could not open new tab. Please disable your pop-up blocker and try again.');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
